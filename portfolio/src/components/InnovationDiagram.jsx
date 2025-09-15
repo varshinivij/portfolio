@@ -123,19 +123,6 @@ export default function InnovationDiagram() {
         fill="none"
         stroke="none"
       />
-
-      {/* white spark travelling L→R then R→L, synced to the cycle */}
-      <circle className="nn-spark" r="2.8">
-        <animateMotion
-          dur="8s"
-          repeatCount="indefinite"
-          keyTimes="0;0.12;0.20;0.29;0.40;0.49;0.58;1"
-          keyPoints="0;0.166;0.333;0.5;0.666;0.833;1;1"
-          calcMode="linear"
-        >
-          <mpath href="#sparkPath" />
-        </animateMotion>
-      </circle>
     </svg>
   );
 }
