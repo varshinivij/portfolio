@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import {About} from '../Projects.jsx'
-import {Projects} from '../Projects.jsx'
+import About from './components/About.jsx';
+import Projects from './components/Projects.jsx';
 import './App.css'
 
 function App() {
