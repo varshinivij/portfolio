@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]   # or 'master' if that's your default
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -18,24 +18,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: Install deps
+          cache: 'npm'
+      - name: Install deps (uses package-lock.json)
         run: npm ci
-
       - name: Build
         run: npm run build
-
-      # SPA fallback (fine to include even if you don't use a router)
-      - name: Add 404 fallback
+      - name: SPA fallback
         run: cp dist/index.html dist/404.html
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
