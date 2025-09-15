@@ -1,0 +1,125 @@
+:root{
+  --bg1:#0b0f1a;
+  --bg2:#0a1224;
+  --surface:#0f1728;
+  --text:#e6ebf3;
+  --muted:#a9b1bd;
+  --accent:#8ad5ff;      /* technical */
+  --accent-2:#ffd98a;    /* ideative spark */
+  --ring: 0 0 0 1px color-mix(in oklab, var(--accent) 55%, transparent);
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  font-synthesis-weight:none;
+}
+
+html,body,#root{height:100%}
+body{
+  margin:0;
+  color:var(--text);
+  background:
+    radial-gradient(900px 600px at 15% 10%, #101a2d 0%, var(--bg1) 35%, var(--bg2) 100%),
+    #0a0f1a;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol", sans-serif;
+}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+
+/* ====== About ====== */
+.about-section{ padding: clamp(2rem, 4vw, 4rem) clamp(1rem, 4vw, 3rem); }
+.about-wrap{
+  display:grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(1.25rem, 3vw, 3rem);
+  align-items:center;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--surface) 85%, transparent), transparent);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  outline: var(--ring);
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+}
+@media (max-width: 880px){ .about-wrap{ grid-template-columns: 1fr; } }
+
+.about-copy h1{
+  margin: 0 0 .5rem;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  letter-spacing: .2px;
+}
+.about-copy p{
+  margin: .6rem 0 0;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 70ch;
+}
+
+.about-visual{ display:grid; place-items:center; padding: clamp(.5rem, 2vw, 1rem); }
+.idea-glyph{ width: min(420px, 100%); height: auto; }
+
+/* nodes */
+.idea-glyph .node circle:first-child{ fill: color-mix(in oklab, var(--accent) 80%, white 0%); }
+.idea-glyph .node .halo{
+  fill: var(--accent); opacity: .18; transform-origin: center;
+  animation: halo 3.2s ease-in-out infinite;
+}
+@keyframes halo{ 0%,100%{transform:scale(1);opacity:.16;} 50%{transform:scale(1.35);opacity:.05;} }
+
+/* edges */
+.idea-glyph .edges line{
+  stroke: color-mix(in oklab, var(--accent) 70%, white 0%);
+  stroke-width: 1.5; stroke-linecap: round;
+  stroke-dasharray: 140 160; stroke-dashoffset: 150;
+  animation: draw 5.5s ease-in-out infinite; opacity:.85;
+}
+.idea-glyph .edges line:nth-child(odd){ animation-delay:.5s; }
+.idea-glyph .edges line:nth-child(3n){ animation-delay:1.1s; }
+@keyframes draw{
+  0%{stroke-dashoffset:150;} 45%{stroke-dashoffset:0;}
+  60%{stroke-dashoffset:0;} 100%{stroke-dashoffset:-140;}
+}
+
+/* spark */
+.idea-glyph .spark{
+  fill: var(--accent-2);
+  filter: drop-shadow(0 0 8px color-mix(in oklab, var(--accent-2) 90%, white 0%));
+  transform-origin: 160px 160px;
+  animation: orbit 6.5s ease-in-out infinite;
+}
+@keyframes orbit{
+  0%{ transform: rotate(0deg) translate(55px) rotate(0deg); }
+  50%{ transform: rotate(185deg) translate(72px) rotate(-185deg); }
+  100%{ transform: rotate(360deg) translate(55px) rotate(-360deg); }
+}
+
+/* prefers reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .idea-glyph .halo, .idea-glyph .edges line, .idea-glyph .spark{ animation:none !important; }
+}
+
+/* ====== Projects ====== */
+.projects-section{ padding: clamp(2rem, 4vw, 4rem) clamp(1rem, 4vw, 3rem); }
+.projects-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+}
+.card{
+  background: color-mix(in oklab, var(--surface) 88%, black 0%);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  outline: var(--ring);
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease, outline-color .25s ease;
+}
+.card:focus-visible{ outline: 2px solid var(--accent); }
+.card:hover{ transform: translateY(-3px); box-shadow: 0 14px 40px rgba(0,0,0,.45); }
+
+.card-media{ aspect-ratio: 4/3; background:#0b1426; overflow:hidden; }
+.card-media img{ width:100%; height:100%; object-fit:cover; }
+
+.card-title{
+  margin: .85rem 1rem 1rem;
+  font-size: 1rem;
+  color: var(--text);
+  letter-spacing:.2px;
+}
+
+/* small helper for containers that sit edge-to-edge nicely */
+section > * { max-width: 1080px; margin-inline: auto; }
