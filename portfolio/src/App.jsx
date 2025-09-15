@@ -1,15 +1,13 @@
-import { useState, useEffect } from 'react'
+import Header from './components/Header.jsx';
 import About from './components/About.jsx';
 import Projects from './components/Projects.jsx';
-import './App.css'
 
-function App() {
+export default function App() {
   return (
     <>
-      <About/>
-      <Projects/>
+      <Header />
+      <About />
+      <Projects />
     </>
-  )
+  );
 }
-
-export default App;

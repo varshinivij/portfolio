@@ -2,7 +2,7 @@ import InnovationDiagram from "./InnovationDiagram.jsx";
 
 export default function About(){
   return (
-    <section className="about-section">
+    <section id="about" className="about-section">
       <div className="about-wrap">
         <div className="about-copy">
           <h1>Varshini Vijay</h1>
@@ -19,12 +19,9 @@ export default function About(){
         </div>
       </div>
 
-      {/* thin hairline to separate About and Projects, no label */}
+      {/* hairline separator (no label) */}
       <div className="section-divider" aria-hidden="true">
-        <div className="rule">
-          <div className="line"></div>
-          <div className="line"></div>
-        </div>
+        <div className="line"></div>
       </div>
     </section>
   );

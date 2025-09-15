@@ -1,23 +1,18 @@
 /* ===== Formal, minimal theme ===== */
 :root{
   --bg:#000;
-  --text:#f2f2f2;
-  --muted:#c9c9c9;
-  --hair:#2a2a2a;
   --panel:#0b0b0b;
-
-  /* neural colors (kept from your last version) */
-  --f0:#ef4444; /* red */
-  --f1:#22c55e; /* green */
-  --f2:#3b82f6; /* blue */
-  --f3:#3b82f6;
-  --b0:#fb923c; /* orange */
-  --b1:#a78bfa; /* purple */
-  --b2:#f472b6; /* pink */
-
+  --text:#f1f1f1;
+  --muted:#cfcfcf;
+  --hair:#232323;
   --ring: 0 0 0 1px rgba(255,255,255,.06);
   --shadow: 0 8px 26px rgba(0,0,0,.55);
-  --cycle: 8s;
+
+  /* neural palette (left -> right) */
+  --c0:#e879f9; /* pink/violet */
+  --c1:#a78bfa; /* violet      */
+  --c2:#60a5fa; /* blue        */
+  --c3:#fb923c; /* orange      */
 }
 
 html,body,#root{height:100%}
@@ -25,26 +20,43 @@ body{
   margin:0;
   background: var(--bg);
   color: var(--text);
-  font-family: "Times New Roman", Times, serif; /* formal, standard */
+  font-family: "Libre Baskerville", Georgia, "Times New Roman", Times, serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
+
 a{color:inherit;text-decoration:none}
 img,svg{display:block;max-width:100%}
-section > * { max-width: 1120px; margin-inline: auto; }
 
-/* ===== Section spacing (closer together) ===== */
-.about-section{ padding: 2.5rem 1.25rem 1.25rem; }
-.projects-section{ padding: 1.25rem 1.25rem 2.5rem; }
+/* ===== Header (simple, formal) ===== */
+.site-header{
+  position: sticky; top:0; z-index: 10;
+  background: rgba(0,0,0,.8);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--hair);
+}
+.header-inner{
+  max-width:1120px; margin:0 auto; padding:.8rem 1.2rem;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.brand{ font-weight:700; letter-spacing:.2px; }
+.nav{ display:flex; gap:1.2rem; }
+.nav a{ color:#d8d8d8; opacity:.85; }
+.nav a:hover{ opacity:1; }
 
-/* ===== About layout ===== */
+/* ===== Section spacing (closer) ===== */
+section{ padding: 1.6rem 1.2rem; }
+.about-section{ padding-top: 2.2rem; }
+
+/* ===== About panel ===== */
 .about-wrap{
+  max-width:1120px; margin:0 auto;
   display:grid;
   grid-template-columns: 1.05fr 1fr;
-  column-gap: clamp(2rem, 6vw, 6rem); /* generous text↔diagram gap like reference */
+  column-gap: clamp(2rem, 6vw, 6rem); /* generous gap (like ref) */
   align-items:center;
   background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00));
-  border-radius: 22px;
+  border-radius: 24px;
   box-shadow: var(--shadow);
   outline: var(--ring);
   padding: clamp(1.25rem, 2.5vw, 2rem);
@@ -52,42 +64,34 @@ section > * { max-width: 1120px; margin-inline: auto; }
 
 .about-copy{ text-align:left; }
 .about-copy h1{
-  font-weight: 700;
-  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
-  margin: 0;
+  margin:0;
+  font-weight:700;
+  font-size: clamp(1.9rem, 3.6vw, 2.6rem);
 }
 .about-divider{
-  width: 56px; height: 2px;
-  background: rgba(255,255,255,.92);
-  border-radius: 1px;
-  margin: 12px 0 14px;
+  width:64px; height:2px; background:#fff;
+  border-radius:2px; margin: 12px 0 16px;
+  opacity:.95;
 }
 .about-copy p{
-  margin: 0;
+  margin:0;
   color: var(--muted);
-  line-height: 1.75;
-  max-width: 64ch;
+  line-height: 1.85;
+  max-width: 62ch;
 }
+
 .about-visual{ display:grid; place-items:center; }
 .nn-glyph{ width: min(560px, 100%); height:auto; }
 
-/* ===== Divider under About leading to Projects ===== */
-.section-divider{
-  width:100%; padding: 1.25rem 0 0.75rem;
-}
-.section-divider .rule{
-  display:grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items:center; gap:.75rem;
-}
+/* thin hairline after About (no label) */
+.section-divider{ max-width:1120px; margin: 0.6rem auto 0; padding:0 1.2rem; }
 .section-divider .line{
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--hair), transparent);
+  height:1px; background: linear-gradient(90deg, transparent, var(--hair), transparent);
 }
-.section-divider .cap{ display:none; } /* no label requested */
 
-/* ===== Projects (no motion, simpler) ===== */
+/* ===== Projects (plain, tidy) ===== */
 .projects-grid{
+  max-width:1120px; margin:0 auto;
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: clamp(.9rem, 2.2vw, 1.25rem);
@@ -99,62 +103,25 @@ section > * { max-width: 1120px; margin-inline: auto; }
   outline: var(--ring);
   overflow: hidden;
 }
-.card-media{ aspect-ratio: 4 / 3; background:#0e1930; }
+.card-media{ aspect-ratio: 4/3; background:#0f172a; }
 .card-media img{ width:100%; height:100%; object-fit:cover; }
-.card-title{
-  margin: .8rem 1rem 1rem;
-  font-size: 1rem;
+.card-title{ margin:.85rem 1rem 1rem; font-size:1rem; }
+
+/* ===== Neural net (static, refined) ===== */
+.nn-base{ fill:#0d0d0d; stroke:#262626; stroke-width:1; }
+.nn-edges line{
+  stroke:#39424e; /* very subtle wires */
+  opacity:.25;
+  stroke-width:1.15; stroke-linecap:round;
 }
+.nn-node{ color: var(--c1); }       /* default */
+.nn-node.col-0{ color: var(--c0); } /* input */
+.nn-node.col-1{ color: var(--c1); }
+.nn-node.col-2{ color: var(--c2); }
+.nn-node.col-3{ color: var(--c3); } /* output */
 
-/* ===== Neural Net lighting + spark (unchanged behavior) ===== */
-.nn-base{ fill:#0e0e0e; stroke:#2a2a2a; stroke-width:1; }
-
-.nn-edges line{ stroke:#262626; opacity:.15; stroke-width:1.25; stroke-linecap:round; }
-/* forward groups */
-.nn-edges.F0{ color: var(--f0); animation: groupGlow var(--cycle) linear infinite .2s; }
-.nn-edges.F1{ color: var(--f1); animation: groupGlow var(--cycle) linear infinite .9s; }
-.nn-edges.F2{ color: var(--f2); animation: groupGlow var(--cycle) linear infinite 1.6s; }
-.nn-edges.F3{ color: var(--f3); animation: groupGlow var(--cycle) linear infinite 2.3s; }
-/* back groups */
-.nn-edges.B3{ color: var(--b0); animation: groupGlow var(--cycle) linear infinite 3.2s; }
-.nn-edges.B2{ color: var(--b1); animation: groupGlow var(--cycle) linear infinite 3.9s; }
-.nn-edges.B1{ color: var(--b2); animation: groupGlow var(--cycle) linear infinite 4.6s; }
-
-@keyframes groupGlow{
-  0%{ filter:none; }
-  10%{ filter: drop-shadow(0 0 6px currentColor); }
-  18%{ filter: drop-shadow(0 0 10px currentColor); }
-  26%{ filter:none; }
-}
-
-.nn-nodeF, .nn-nodeB{ opacity:0; }
-.nn-nodeF{ animation: nodePulse var(--cycle) linear infinite; }
-.nn-nodeB{ animation: nodePulse var(--cycle) linear infinite; }
-
-.nn-nodeF.L0{ color: var(--f0); animation-delay:.2s; }
-.nn-nodeF.L1{ color: var(--f1); animation-delay:.9s; }
-.nn-nodeF.L2{ color: var(--f2); animation-delay:1.6s; }
-.nn-nodeF.L3{ color: var(--f3); animation-delay:2.3s; }
-.nn-nodeB.L3{ color: var(--b0); animation-delay:3.2s; }
-.nn-nodeB.L2{ color: var(--b1); animation-delay:3.9s; }
-.nn-nodeB.L1{ color: var(--b2); animation-delay:4.6s; }
-
-@keyframes nodePulse{
-  0%{ opacity:0; }
-  10%{ opacity:1; filter: drop-shadow(0 0 8px currentColor); }
-  20%{ opacity:1; filter: drop-shadow(0 0 12px currentColor); }
-  30%{ opacity:.15; filter:none; }
-  100%{ opacity:0; }
-}
 .nn-core{ fill: currentColor; }
-.nn-halo{ fill: currentColor; opacity:.14; transform-origin:center; animation: halo 2.2s ease-in-out infinite; }
-@keyframes halo{ 0%,100%{ transform:scale(1); opacity:.12;} 50%{ transform:scale(1.35); opacity:.04;} }
-
-/* white spark along the columns and back */
-.nn-spark{
-  fill:#fff;
-  filter: drop-shadow(0 0 8px #fff);
-}
-@media (prefers-reduced-motion: reduce){
-  .nn-edges, .nn-nodeF, .nn-nodeB{ animation:none !important; }
+.nn-halo{
+  fill: currentColor; opacity:.12;
+  filter: drop-shadow(0 0 8px currentColor);
 }
