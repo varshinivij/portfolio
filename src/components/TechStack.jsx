@@ -1,39 +1,41 @@
-
 const STACK = [
   {
     group: "Languages",
     items: [
       "Python",
-      "JavaScript",
-      "TypeScript",
       "C/C++",
-      "Java",
-      "SQL",
-      "MATLAB",
+      "JavaScript",
+      "R",
+      "HTML",
+      "CSS",
+      "MIPS Assembly",
     ],
   },
   {
     group: "Frameworks & Libraries",
     items: [
-      "React",
+      "React.js",
+      "Redux.js",
+      "Flask",
+      "Tailwind CSS",
+      "Material UI",
+      "Flutter",
+      "FastAPI",
+      "PyTorch",
+      "TensorFlow",
       "Node.js",
-      "Express",
-      "Vite",
-      "NumPy",
-      "Pandas",
-      "Tailwind",
+      "ChromaDB"
     ],
   },
   {
     group: "Tools & Platforms",
     items: [
-      "Git",
-      "Linux",
+      "Linux/Ubuntu",
       "Docker",
-      "AWS",
-      "Firebase",
-      "PostgreSQL",
-      "VS Code",
+      "Singularity",
+      "AWS Cloud",
+      "Git",
+      "VS Code"
     ],
   },
 ];
