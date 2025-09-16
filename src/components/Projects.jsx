@@ -31,26 +31,38 @@ function ProjCard({ title, href, image, description }) {
 export default function Projects() {
   // Add/adjust your projects here.
   const projects = [
-    {
-      title: "ZIMS Website",
-      href: "https://example.com/zims", // put your link
-      image: "/assets/proj-2.png",
-      description: "A modern web portal for ZIMS with streamlined UX and robust backend.",
-    },
-    {
-      title: "Self-controlling robot",
-      href: "https://example.com/robot", // put your link
-      image: "/assets/proj-2.png",
-      description: "Autonomous rover with sensor fusion and PID control.",
-    },
-    {
-      title: "OLAF: CLI tool for bioinformatics",
-      href: "https://example.com/olaf", // put your link
-      image: "/assets/proj-1.png",
-      description: "Command-line suite for fast sequence analysis and pipelines.",
-    },
-    // add more objects to show more slides
+    {
+      title: "OLAF: CLI Tool for Bioinformatics",
+      href: "https://github.com/OpenTechBio/Olaf",
+      image: "/assets/proj-1.png",
+      description: "Achieved 20% error reduction with RAG; developed a CLI tool that iteratively improves bioinformatics code w/ Docker/Singularity.",
+    },
+    {
+      title: "PCOSitive AI Assistant",
+      href: "https://pcos-positive-app.vercel.app/",
+      image: "/assets/proj-2.png",
+      description: "Reached 85% projected satisfaction with an AI-powered assistant using SVD++ recommendation and fine-tuned BERT sentiment analysis.",
+    },
+    {
+      title: "Zotbotics Website & Auth System",
+      href: "https://example.com/zotbotics", // replace with real link if you want
+      image: "/assets/proj-3.png",
+      description: "Built club website and authentication system with SQL DB + custom STL hasher, securing data for 1000+ use cases.",
+    },
+    {
+      title: "Utility Patent – Deaf Athlete Communication System",
+      href: "https://patents.google.com/patent/US20240416212A1/en?oq=US+20240416212+A1",
+      image: "/assets/proj-8.png",
+      description: "Secured US Patent (US 20240416212 A1) and won $10K Lemelson MIT grant for a communication system for deaf basketball athletes.",
+    },
+    {
+      title: "Tic-Tac-Toe with Reinforcement Learning",
+      href: "https://github.com/varshinivij/tic-tac-toe-rl",
+      image: "/assets/proj-3.png",
+      description: "Built with 3 reinforcement learning methods (Q-Learning, DQN, MCTS) and deployed with FastAPI + React.",
+    },
   ];
+
 
   const trackRef = useRef(null);
   const [atStart, setAtStart] = useState(true);
