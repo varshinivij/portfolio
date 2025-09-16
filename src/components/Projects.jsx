@@ -84,6 +84,9 @@ export default function Projects() {
 
   return (
     <section id="projects" className="projects-section">
+      <header className="section-head">
+        <h2>Projects</h2>
+      </header>
       <div className="carousel">
         <button
           className="carousel-btn prev"

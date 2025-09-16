@@ -1,4 +1,4 @@
-/* ===== Formal, minimal theme ===== */
+/* ===== Formal, minimal theme (relay + hard-aligned titles) ===== */
 :root{
   --bg:#000;
   --panel:#0b0b0b;
@@ -8,161 +8,238 @@
   --ring: 0 0 0 1px rgba(255,255,255,.06);
   --shadow: 0 8px 26px rgba(0,0,0,.55);
 
-  /* neural animation palette + timing */
-  --f0:#ef4444; /* red    */
-  --f1:#22c55e; /* green  */
-  --f2:#3b82f6; /* blue   */
-  --b0:#fb923c; /* orange */
-  --b1:#a78bfa; /* purple */
-  --b2:#f472b6; /* pink   */
+  /* layout */
+  --container: 1120px;
+  --gutter: 1.2rem;                         /* outer page padding */
+  --card-pad: clamp(1.25rem, 2.5vw, 2rem);  /* inner pad used by About card */
+  --rail-left: calc(var(--gutter) + var(--card-pad)); /* universal title rail */
+
+  /* neural anim palette */
+  --f0:#ef4444; --f1:#22c55e; --f2:#3b82f6;
+  --b0:#fb923c; --b1:#a78bfa; --b2:#f472b6;
   --cycle: 8s;
+
+  /* rainbow for borders */
+  --rbw: conic-gradient(
+    from 0deg,
+    #ff6b6b, #f59e0b, #facc15, #22c55e,
+    #14b8a6, #3b82f6, #8b5cf6, #ec4899, #ff6b6b
+  );
+
+  /* relay timing across the 3 boxes */
+  --relay: 7.2s; /* whole loop; each box gets 1/3 */
 }
 
 html,body,#root{height:100%}
 body{
-  margin:0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: "Libre Baskerville", Georgia, "Times New Roman", Times, serif;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:"Libre Baskerville", Georgia, "Times New Roman", Times, serif;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
 a{color:inherit;text-decoration:none}
 img,svg{display:block;max-width:100%}
 
 /* ===== Header ===== */
 .site-header{
-  position: sticky; top:0; z-index:10;
-  background: rgba(0,0,0,.8); backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--hair);
+  position:sticky; top:0; z-index:10;
+  background:rgba(0,0,0,.8); backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--hair);
 }
 .header-inner{
-  max-width:1120px; margin:0 auto; padding:.8rem 1.2rem;
-  display:flex; align-items:center; justify-content:flex-end; /* right aligned nav */
+  max-width:var(--container); margin:0 auto; padding:.8rem var(--gutter);
+  display:flex; align-items:center; justify-content:flex-end;
 }
 .nav{ display:flex; gap:1.2rem; }
 .nav a{ color:#d8d8d8; opacity:.85; } .nav a:hover{ opacity:1; }
 
 /* ===== Sections ===== */
-section{ padding: 1.6rem 1.2rem; }
-.about-section{ padding-top: 2.2rem; }
+section{ padding: 3rem var(--gutter); }
+.about-section{ padding-top:3.2rem; }
+
+/* ===== UNIVERSAL TITLE ALIGNMENT ===== */
+.section-head,
+.stack-head{
+  max-width:var(--container);
+  margin:0 auto;
+  padding-left: var(--rail-left) !important; /* push to same rail as About text */
+  padding-right: var(--gutter);
+  padding-bottom: .8rem;
+}
+.section-head h2,
+.stack-head h2,
+.stack-section h2,
+.projects-section h2{
+  margin:0 !important;
+  font-weight:700;
+  font-size: clamp(1.3rem, 2.6vw, 1.6rem); /* Tech Stack & Projects same size */
+}
 
 /* ===== About panel ===== */
 .about-wrap{
-  max-width:1120px; margin:0 auto;
-  display:grid;
-  grid-template-columns: 1.05fr 1fr;
-  column-gap: clamp(3rem, 8vw, 9rem); /* extra blank space between text & diagram */
-  align-items:center;
-  background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00));
-  border-radius: 24px;
-  box-shadow: var(--shadow);
-  outline: var(--ring);
-  padding: clamp(1.25rem, 2.5vw, 2rem);
+  max-width:var(--container); margin:0 auto;
+  display:grid; grid-template-columns:1.05fr 1fr;
+  column-gap:clamp(3rem, 8vw, 9rem); align-items:center;
+  background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+  border-radius:24px; box-shadow:var(--shadow); outline:var(--ring);
+  padding:var(--card-pad);
+  margin-bottom: clamp(.8rem, 2.6vw, 1.6rem); /* tighter: About -> Tech Stack */
 }
-.about-copy h1{ margin:0; font-weight:700; font-size: clamp(1.9rem, 3.6vw, 2.6rem); }
+.about-copy h1{
+  margin:0; font-weight:700;
+  font-size: clamp(2.2rem, 4.2vw, 3rem);   /* bigger than h2s */
+}
 .about-divider{ width:64px; height:2px; background:#fff; border-radius:2px; margin:12px 0 16px; opacity:.95; }
 .about-copy p{ margin:0; color:var(--muted); line-height:1.85; max-width:62ch; }
 .about-visual{ display:grid; place-items:center; }
 .nn-glyph{ width:min(560px,100%); height:auto; }
 
-/* hairline after About (no label) */
-.section-divider{ max-width:1120px; margin:.6rem auto 0; padding:0 1.2rem; }
+/* subtle hairline after About */
+.section-divider{ max-width:var(--container); margin:1.1rem auto 0; padding:0 var(--gutter); }
 .section-divider .line{ height:1px; background:linear-gradient(90deg,transparent,var(--hair),transparent); }
 
-/* ===== Projects: carousel that shows two large cards ===== */
-.projects-section{ scroll-margin-top: 72px; padding-top: 1.2rem; }
-.carousel{
-  position: relative;
-  max-width:1120px; margin:0 auto;
+/* ===== Tech Stack ===== */
+.stack-section{ padding-top:.4rem; margin-top:.1rem; } /* same section as About */
+.stack-wrap{ max-width:var(--container); margin:0 auto; padding:0 var(--gutter); }
+.stack-sub{
+  margin:0; margin-left: var(--rail-left);
+  color:var(--muted); line-height:1.6; max-width:68ch; font-size:.98rem;
 }
+
+/* horizontal 3-box row */
+.stack-groups{
+  display:flex; gap:clamp(1rem, 2vw, 1.4rem);
+  flex-wrap:nowrap; justify-content:space-between;
+  max-width:var(--container); margin:1.1rem auto 0; padding:0 var(--gutter);
+}
+@media (max-width:900px){ .stack-groups{ flex-wrap:wrap; } }
+
+/* ===== Calm base + RELAY rainbow border =====
+   Base: subtle white ring.
+   Active box: crisp rainbow border + very soft outer glow (one at a time).
+*/
+.stack-group{
+  position:relative; border-radius:14px; padding:.9rem; flex:1 1 0; min-width:0;
+  background:#0b0b0b;
+  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.22); /* calm ring always on */
+  z-index:0;
+}
+
+/* Crisp rainbow BORDER (transparent center) */
+.stack-group::before{
+  content:""; position:absolute; inset:0; border-radius:14px; pointer-events:none; z-index:1;
+  background:
+    linear-gradient(#0b0b0b, #0b0b0b) padding-box,
+    var(--rbw) border-box;
+  border:1.5px solid transparent;
+  opacity:0; /* off unless active */
+}
+
+/* Soft outer glow (very low) */
+.stack-group::after{
+  content:""; position:absolute; inset:-3px; border-radius:16px; pointer-events:none; z-index:-1;
+  background: var(--rbw);
+  filter: blur(12px);
+  opacity:0; /* off unless active */
+}
+
+/* Relay animation — each box gets its moment, then returns to white */
+@keyframes borderRelay{
+  0%   { opacity:1; }
+  16%  { opacity:1; }
+  20%  { opacity:0; }
+  100% { opacity:0; }
+}
+@keyframes glowRelay{
+  0%   { opacity:.12; filter: blur(10px); }
+  16%  { opacity:.12; filter: blur(10px); }
+  20%  { opacity:0;   filter: blur(14px); }
+  100% { opacity:0;   filter: blur(14px); }
+}
+
+/* Apply animations with stagger so only one is active at a time */
+.stack-group:nth-child(1)::before{ animation: borderRelay var(--relay) linear infinite both; }
+.stack-group:nth-child(1)::after { animation: glowRelay   var(--relay) linear infinite both; }
+
+.stack-group:nth-child(2)::before{ animation: borderRelay var(--relay) linear infinite both; animation-delay: calc(var(--relay)/3); }
+.stack-group:nth-child(2)::after { animation: glowRelay   var(--relay) linear infinite both; animation-delay: calc(var(--relay)/3); }
+
+.stack-group:nth-child(3)::before{ animation: borderRelay var(--relay) linear infinite both; animation-delay: calc(2*var(--relay)/3); }
+.stack-group:nth-child(3)::after { animation: glowRelay   var(--relay) linear infinite both; animation-delay: calc(2*var(--relay)/3); }
+
+/* headings + badges */
+.stack-group h3{ margin:0 0 .6rem; font-size:.95rem; letter-spacing:.4px; opacity:.9; }
+.stack-badges{ list-style:none; padding:0; margin:0; display:flex; flex-wrap:wrap; gap:.5rem .6rem; }
+.stack-badge{
+  padding:.38rem .6rem; border:1px solid var(--hair);
+  border-radius:999px; background:#0b0b0b; color:#e9e9e9; font-size:.92rem;
+}
+.stack-badge:hover{ background:#111; }
+
+/* ===== Projects (separate section → more vertical space) ===== */
+.projects-section{
+  scroll-margin-top:72px;
+  padding-top:1.2rem;
+  margin-top: clamp(3.8rem, 9vw, 7rem); /* bigger gap from Tech Stack */
+}
+.carousel{ position:relative; max-width:var(--container); margin:0 auto; }
 .carousel-track{
-  --gap: 24px;
-  display:flex; gap: var(--gap);
-  overflow-x:auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding: 0 2.8rem; /* space for buttons */
+  --gap:24px; display:flex; gap:var(--gap); overflow-x:auto; scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch; padding:0 2.8rem;
 }
 .proj-card{
-  flex: 0 0 calc((100% - var(--gap)) / 2); /* two per view */
-  background: var(--panel);
-  border-radius: 18px;
-  box-shadow: var(--shadow);
-  outline: var(--ring);
-  overflow: hidden;
-  scroll-snap-align: start;
+  flex:0 0 calc((100% - var(--gap)) / 2);
+  background:var(--panel); border-radius:18px; box-shadow:var(--shadow); outline:var(--ring);
+  overflow:hidden; scroll-snap-align:start;
 }
-@media (max-width: 720px){
-  .proj-card{ flex-basis: 85%; }       /* one per view on mobile */
-  .carousel-track{ padding: 0 2.2rem; }
+@media (max-width:720px){
+  .proj-card{ flex-basis:85%; }
+  .carousel-track{ padding:0 2.2rem; }
 }
-
-.proj-card__header{
-  display:flex; align-items:center; justify-content:space-between;
-  padding: 1rem 1rem .2rem;
-}
-.proj-card__title{
-  margin:0; font-size: 1.15rem; font-weight: 700; letter-spacing:.2px;
-}
+.proj-card__header{ display:flex; align-items:center; justify-content:space-between; padding:1rem 1rem .2rem; }
+.proj-card__title{ margin:0; font-size:1.15rem; font-weight:700; letter-spacing:.2px; }
 .proj-card__arrow{
-  display:inline-grid; place-items:center;
-  width:30px; height:30px; border-radius:999px;
-  border:1px solid var(--hair); background:#0b0b0b; color:#eaeaea;
-  text-decoration:none; font-size: 16px; line-height: 1;
+  display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px;
+  border:1px solid var(--hair); background:#0b0b0b; color:#eaeaea; text-decoration:none; font-size:16px; line-height:1;
 }
 .proj-card__arrow:hover{ background:#111; }
-
-.proj-card__media{ aspect-ratio: 16 / 10; background:#0f172a; }
+.proj-card__media{ aspect-ratio:16/10; background:#0f172a; }
 .proj-card__media img{ width:100%; height:100%; object-fit:cover; }
+.proj-card__desc{ margin:.75rem 1rem 1.1rem; color:var(--muted); line-height:1.6; font-size:.98rem; }
 
-.proj-card__desc{
-  margin: .75rem 1rem 1.1rem;
-  color: var(--muted);
-  line-height: 1.6;
-  font-size: .98rem;
-}
-
-/* Carousel buttons */
+/* Carousel ui */
 .carousel-btn{
-  position:absolute; top:50%; transform: translateY(-50%);
+  position:absolute; top:50%; transform:translateY(-50%);
   width:40px; height:40px; border-radius:999px;
   border:1px solid var(--hair); background:#0b0b0b; color:#eaeaea;
   display:grid; place-items:center; cursor:pointer; z-index:2;
 }
-.carousel-btn.prev{ left: .4rem; }
-.carousel-btn.next{ right: .4rem; }
-.carousel-btn:disabled{ opacity:.35; cursor: default; }
-
-/* Edge fades */
+.carousel-btn.prev{ left:.4rem; }
+.carousel-btn.next{ right:.4rem; }
+.carousel-btn:disabled{ opacity:.35; cursor:default; }
 .carousel-fade{
   position:absolute; top:0; bottom:0; width:40px; pointer-events:none; z-index:1;
-  background: linear-gradient(90deg, var(--bg), transparent);
+  background:linear-gradient(90deg,var(--bg),transparent);
 }
-.carousel-fade.right{ right:0; left:auto; transform: scaleX(-1); }
+.carousel-fade.right{ right:0; left:auto; transform:scaleX(-1); }
 
-/* ===== Neural net (animated with spark) ===== */
+/* ===== Neural net ===== */
 .nn-base{ fill:#0d0d0d; stroke:#262626; stroke-width:1; }
 .nn-edges line{ stroke:#2a2a2a; opacity:.22; stroke-width:1.25; stroke-linecap:round; }
-
-/* forward edges (RGB) */
 .nn-edges.F0{ color:var(--f0); animation: groupGlow var(--cycle) linear infinite .2s; }
 .nn-edges.F1{ color:var(--f1); animation: groupGlow var(--cycle) linear infinite .9s; }
 .nn-edges.F2{ color:var(--f2); animation: groupGlow var(--cycle) linear infinite 1.6s; }
 .nn-edges.F3{ color:var(--f2); animation: groupGlow var(--cycle) linear infinite 2.3s; }
-/* back edges (orange→purple→pink) */
 .nn-edges.B3{ color:var(--b0); animation: groupGlow var(--cycle) linear infinite 3.2s; }
 .nn-edges.B2{ color:var(--b1); animation: groupGlow var(--cycle) linear infinite 3.9s; }
 .nn-edges.B1{ color:var(--b2); animation: groupGlow var(--cycle) linear infinite 4.6s; }
-
 @keyframes groupGlow{
-  0%{ filter:none; }
-  10%{ filter: drop-shadow(0 0 6px currentColor); }
-  18%{ filter: drop-shadow(0 0 10px currentColor); }
-  26%{ filter:none; }
+  0%{filter:none;}
+  10%{filter:drop-shadow(0 0 6px currentColor);}
+  18%{filter:drop-shadow(0 0 10px currentColor);}
+  26%{filter:none;}
 }
 
-.nn-nodeF, .nn-nodeB{ opacity:0; }
+.nn-nodeF,.nn-nodeB{ opacity:0; }
 .nn-nodeF{ animation: nodePulse var(--cycle) linear infinite; }
 .nn-nodeB{ animation: nodePulse var(--cycle) linear infinite; }
 .nn-nodeF.L0{ color:var(--f0); animation-delay:.2s; }
@@ -172,19 +249,85 @@ section{ padding: 1.6rem 1.2rem; }
 .nn-nodeB.L3{ color:var(--b0); animation-delay:3.2s; }
 .nn-nodeB.L2{ color:var(--b1); animation-delay:3.9s; }
 .nn-nodeB.L1{ color:var(--b2); animation-delay:4.6s; }
-
 @keyframes nodePulse{
-  0%{ opacity:0; }
-  10%{ opacity:1; filter: drop-shadow(0 0 8px currentColor); }
-  20%{ opacity:1; filter: drop-shadow(0 0 12px currentColor); }
-  30%{ opacity:.15; filter:none; }
-  100%{ opacity:0; }
+  0%{opacity:0;}
+  10%{opacity:1;filter:drop-shadow(0 0 8px currentColor);}
+  20%{opacity:1;filter:drop-shadow(0 0 12px currentColor);}
+  30%{opacity:.15;filter:none;}
+  100%{opacity:0;}
 }
-.nn-core{ fill: currentColor; }
-.nn-halo{ fill: currentColor; opacity:.12; transform-origin:center; animation: halo 2.2s ease-in-out infinite; }
-@keyframes halo{ 0%,100%{ transform:scale(1); opacity:.1;} 50%{ transform:scale(1.3); opacity:.04;} }
-.nn-spark{ fill:#fff; filter: drop-shadow(0 0 8px #fff); }
+.nn-core{ fill:currentColor; }
+.nn-halo{ fill:currentColor; opacity:.12; transform-origin:center; animation:halo 2.2s ease-in-out infinite; }
+@keyframes halo{ 0%,100%{transform:scale(1);opacity:.1;} 50%{transform:scale(1.3);opacity:.04;} }
+.nn-spark{ fill:#fff; filter:drop-shadow(0 0 8px #fff); }
 
 @media (prefers-reduced-motion: reduce){
-  .nn-edges, .nn-nodeF, .nn-nodeB{ animation:none !important; }
+  .nn-edges,.nn-nodeF,.nn-nodeB,
+  /* rainbow border should NOT cover content */
+  .stack-group::before{
+    content:"";
+    position:absolute; inset:0; border-radius:14px; pointer-events:none; z-index:1;
+    background:
+      linear-gradient(transparent,transparent) padding-box, /* transparent center */
+      var(--rbw) border-box;                                /* rainbow border */
+    border:1.5px solid transparent;
+    opacity:0; /* animated on via keyframes */
+  }
+
+  .stack-group::after{
+    content:"";
+    position:absolute; inset:-3px; border-radius:16px; pointer-events:none; z-index:-1;
+    background: var(--rbw);
+    filter: blur(12px);
+    opacity:0; /* animated on via keyframes */
+  }
+
+}
+
+
+/* ========= KILL THE RAINBOW FOR NOW ========= */
+.stack-group::before,
+.stack-group::after{
+  content: none !important;
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+/* ========= ONE HARD TITLE RAIL (container left) ========= */
+:root{
+  /* rail is at the page gutter (container’s left edge) */
+  --rail-left: var(--gutter);
+}
+
+/* Tech Stack + Projects wrappers sit exactly on the rail */
+.stack-head,
+.section-head{
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-left: var(--rail-left) !important;
+  padding-right: var(--gutter) !important;
+  padding-bottom: .8rem !important;
+}
+
+/* Kill any leftover margin-left rules from earlier */
+.stack-head h2,
+.section-head h2,
+.stack-section h2,
+.projects-section h2{
+  margin: 0 !important;
+  font-size: clamp(1.3rem, 2.6vw, 1.6rem); /* same size for Tech Stack & Projects */
+}
+
+/* Subtitle under Tech Stack also aligns to the rail */
+.stack-sub{
+  margin-left: var(--rail-left) !important;
+}
+
+/* About title aligns to the same rail by offsetting the card’s inner padding */
+.about-copy{
+  margin-left: calc(var(--rail-left) - var(--card-pad)) !important;
+}
+/* keep it safe on small screens */
+@media (max-width: 900px){
+  .about-copy{ margin-left: 0 !important; }
 }
