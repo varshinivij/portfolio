@@ -8,8 +8,8 @@ export default function About(){
           <h1>Varshini Vijay</h1>
           <div className="about-divider" aria-hidden="true"></div>
           <p>
-            In pursuit of innovation — driving equitable solutions that reinvent, enhance, and rectify existing systems.
-            Building a strong technical foundation with a deep understanding of the mathematical principles that underpin them.
+            In pursuit of innovation — driving inclusive solutions that enhance, rectify or reinvent existing systems.
+            Building a strong technical skillset with a deep understanding of the mathematical principles that underpin them.
             Small steps, repeated, create change.
           </p>
         </div>
