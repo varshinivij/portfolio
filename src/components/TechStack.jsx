@@ -44,8 +44,8 @@ export default function TechStack() {
   return (
     <section id="stack" className="stack-section" aria-labelledby="stack-title">
       <div className="stack-wrap">
-        <header className="stack-head">
-          <h2 id="stack-title">Tech&nbsp;Stack</h2>
+        <header className="section-head">
+          <h2>Tech Stack</h2>
         </header>
 
         <div className="stack-groups">
