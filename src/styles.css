@@ -104,8 +104,8 @@ section{ padding: 3rem var(--gutter); }
 
 /* ===== Tech Stack ===== */
 .stack-section{ 
-  padding-top: 0.5rem;
-  margin-top: 0; /* Remove margin since we have divider */
+  padding-top: 1rem;
+  padding-bottom: 7rem;
 }
 
 .stack-wrap{ 
@@ -161,8 +161,8 @@ section{ padding: 3rem var(--gutter); }
 /* ===== Projects (now comes first after About) ===== */
 .projects-section{
   scroll-margin-top:72px;
-  padding-top: 0.5rem;
-  margin-top: 0; /* Remove margin since we have divider */
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 .carousel{ position:relative; max-width:var(--container); margin:0 auto; }
 .carousel-track{
