@@ -19,8 +19,8 @@ export default function About(){
         </div>
       </div>
 
-      {/* hairline separator */}
-      <div className="section-divider" aria-hidden="true">
+      {/* divider before Projects section */}
+      <div className="about-projects-divider" aria-hidden="true">
         <div className="line"></div>
       </div>
     </section>

@@ -78,7 +78,7 @@ section{ padding: 3rem var(--gutter); }
   background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
   border-radius:24px; box-shadow:var(--shadow); outline:var(--ring);
   padding:var(--card-pad);
-  margin-bottom: clamp(.8rem, 2.6vw, 1.6rem);
+  margin-bottom: clamp(2rem, 4vw, 3rem); /* More space before Tech Stack */
 }
 .about-copy h1{
   margin:0; font-weight:700;
@@ -98,14 +98,14 @@ section{ padding: 3rem var(--gutter); }
   .about-copy{ margin-left: 0 !important; }
 }
 
-/* subtle hairline after About */
-.section-divider{ max-width:var(--container); margin:1.1rem auto 0; padding:0 var(--gutter); }
-.section-divider .line{ height:1px; background:linear-gradient(90deg,transparent,var(--hair),transparent); }
+/* DIVIDERS REMOVED */
+
+/* subtle hairline after About - REMOVED */
 
 /* ===== Tech Stack ===== */
 .stack-section{ 
-  padding-top: 1.2rem;
-  margin-top: clamp(2.5rem, 6vw, 4rem); /* proper spacing from About */
+  padding-top: 0.5rem;
+  margin-top: 0; /* Remove margin since we have divider */
 }
 
 .stack-wrap{ 
@@ -132,58 +132,22 @@ section{ padding: 3rem var(--gutter); }
 }
 @media (max-width:900px){ .stack-groups{ flex-wrap:wrap; } }
 
-/* ===== Calm base + RELAY rainbow border =====
-   Base: subtle white ring.
-   Active box: crisp rainbow border + very soft outer glow (one at a time).
-*/
+/* ===== Tech Stack Boxes - Clean, No Rainbow ===== */
 .stack-group{
-  position:relative; border-radius:14px; padding:.9rem; flex:1 1 0; min-width:0;
+  position:relative; 
+  border-radius:14px; 
+  padding:.9rem; 
+  flex:1 1 0; 
+  min-width:0;
   background:#0b0b0b;
-  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.22); /* calm ring always on */
+  border: 1.5px solid rgba(255,255,255,.22);
   z-index:0;
 }
 
-/* Crisp rainbow BORDER (transparent center) */
-.stack-group::before{
-  content:""; position:absolute; inset:0; border-radius:14px; pointer-events:none; z-index:1;
-  background:
-    linear-gradient(#0b0b0b, #0b0b0b) padding-box,
-    var(--rbw) border-box;
-  border:1.5px solid transparent;
-  opacity:0; /* off unless active */
+.stack-group:hover{
+  border-color: rgba(255,255,255,.35);
+  transition: border-color 0.2s ease;
 }
-
-/* Soft outer glow (very low) */
-.stack-group::after{
-  content:""; position:absolute; inset:-3px; border-radius:16px; pointer-events:none; z-index:-1;
-  background: var(--rbw);
-  filter: blur(12px);
-  opacity:0; /* off unless active */
-}
-
-/* Relay animation — each box gets its moment, then returns to white */
-@keyframes borderRelay{
-  0%   { opacity:1; }
-  16%  { opacity:1; }
-  20%  { opacity:0; }
-  100% { opacity:0; }
-}
-@keyframes glowRelay{
-  0%   { opacity:.12; filter: blur(10px); }
-  16%  { opacity:.12; filter: blur(10px); }
-  20%  { opacity:0;   filter: blur(14px); }
-  100% { opacity:0;   filter: blur(14px); }
-}
-
-/* Apply animations with stagger so only one is active at a time */
-.stack-group:nth-child(1)::before{ animation: borderRelay var(--relay) linear infinite both; }
-.stack-group:nth-child(1)::after { animation: glowRelay   var(--relay) linear infinite both; }
-
-.stack-group:nth-child(2)::before{ animation: borderRelay var(--relay) linear infinite both; animation-delay: calc(var(--relay)/3); }
-.stack-group:nth-child(2)::after { animation: glowRelay   var(--relay) linear infinite both; animation-delay: calc(var(--relay)/3); }
-
-.stack-group:nth-child(3)::before{ animation: borderRelay var(--relay) linear infinite both; animation-delay: calc(2*var(--relay)/3); }
-.stack-group:nth-child(3)::after { animation: glowRelay   var(--relay) linear infinite both; animation-delay: calc(2*var(--relay)/3); }
 
 /* headings + badges */
 .stack-group h3{ margin:0 0 .6rem; font-size:.95rem; letter-spacing:.4px; opacity:.9; }
@@ -194,11 +158,11 @@ section{ padding: 3rem var(--gutter); }
 }
 .stack-badge:hover{ background:#111; }
 
-/* ===== Projects (separate section → more vertical space) ===== */
+/* ===== Projects (now comes first after About) ===== */
 .projects-section{
   scroll-margin-top:72px;
-  padding-top:1.2rem;
-  margin-top: clamp(3.8rem, 9vw, 7rem); /* bigger gap from Tech Stack */
+  padding-top: 0.5rem;
+  margin-top: 0; /* Remove margin since we have divider */
 }
 .carousel{ position:relative; max-width:var(--container); margin:0 auto; }
 .carousel-track{
@@ -286,12 +250,4 @@ section{ padding: 3rem var(--gutter); }
   .stack-group::after {
     animation: none !important;
   }
-}
-
-/* ========= KILL THE RAINBOW FOR NOW ========= */
-.stack-group::before,
-.stack-group::after{
-  content: none !important;
-  animation: none !important;
-  opacity: 0 !important;
 }

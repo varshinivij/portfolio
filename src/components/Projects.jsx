@@ -34,7 +34,7 @@ export default function Projects() {
     {
       title: "ZIMS Website",
       href: "https://example.com/zims", // put your link
-      image: "/assets/proj-1.png",
+      image: "/assets/proj-2.png",
       description: "A modern web portal for ZIMS with streamlined UX and robust backend.",
     },
     {
@@ -46,7 +46,7 @@ export default function Projects() {
     {
       title: "OLAF: CLI tool for bioinformatics",
       href: "https://example.com/olaf", // put your link
-      image: "/assets/proj-3.png",
+      image: "/assets/proj-1.png",
       description: "Command-line suite for fast sequence analysis and pipelines.",
     },
     // add more objects to show more slides

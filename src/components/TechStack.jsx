@@ -1,5 +1,3 @@
-// Edit the arrays below with your actual stack.
-// Keep labels short; the design will wrap them nicely.
 
 const STACK = [
   {
@@ -63,11 +61,6 @@ export default function TechStack() {
             </section>
           ))}
         </div>
-      </div>
-
-      {/* divider before Projects section */}
-      <div className="tech-projects-divider" aria-hidden="true">
-        <div className="line"></div>
       </div>
     </section>
   );
