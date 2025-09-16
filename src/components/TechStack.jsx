@@ -45,6 +45,7 @@ export default function TechStack() {
     <section id="stack" className="stack-section" aria-labelledby="stack-title">
       <header className="section-head">
         <h2>Tech Stack</h2>
+        <p className="stack-sub">The tools I reach for most often across research, product, and build work.</p>
       </header>
 
       <div className="stack-wrap">
@@ -62,10 +63,11 @@ export default function TechStack() {
             </section>
           ))}
         </div>
+      </div>
 
-        <div className="section-divider" aria-hidden="true">
-          <div className="line"></div>
-        </div>
+      {/* divider before Projects section */}
+      <div className="tech-projects-divider" aria-hidden="true">
+        <div className="line"></div>
       </div>
     </section>
   );
