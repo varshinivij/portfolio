@@ -19,7 +19,7 @@ export default function About(){
         </div>
       </div>
 
-      {/* hairline separator (no label) */}
+      {/* hairline separator */}
       <div className="section-divider" aria-hidden="true">
         <div className="line"></div>
       </div>

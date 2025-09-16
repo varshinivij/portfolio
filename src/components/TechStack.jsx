@@ -43,11 +43,11 @@ const STACK = [
 export default function TechStack() {
   return (
     <section id="stack" className="stack-section" aria-labelledby="stack-title">
-      <div className="stack-wrap">
-        <header className="stack-head">
-          <h2 id="stack-title">Tech&nbsp;Stack</h2>
-        </header>
+      <header className="section-head">
+        <h2>Tech Stack</h2>
+      </header>
 
+      <div className="stack-wrap">
         <div className="stack-groups">
           {STACK.map(({ group, items }) => (
             <section key={group} className="stack-group" aria-label={group}>
@@ -61,6 +61,10 @@ export default function TechStack() {
               </ul>
             </section>
           ))}
+        </div>
+
+        <div className="section-divider" aria-hidden="true">
+          <div className="line"></div>
         </div>
       </div>
     </section>

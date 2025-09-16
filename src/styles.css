@@ -12,7 +12,7 @@
   --container: 1120px;
   --gutter: 1.2rem;                         /* outer page padding */
   --card-pad: clamp(1.25rem, 2.5vw, 2rem);  /* inner pad used by About card */
-  --rail-left: calc(var(--gutter) + var(--card-pad)); /* universal title rail */
+  --rail-left: var(--gutter); /* universal title rail - simplified to gutter */
 
   /* neural anim palette */
   --f0:#ef4444; --f1:#22c55e; --f2:#3b82f6;
@@ -57,21 +57,17 @@ section{ padding: 3rem var(--gutter); }
 .about-section{ padding-top:3.2rem; }
 
 /* ===== UNIVERSAL TITLE ALIGNMENT ===== */
-.section-head,
-.stack-head{
+.section-head{
   max-width:var(--container);
   margin:0 auto;
-  padding-left: var(--rail-left) !important; /* push to same rail as About text */
+  padding-left: var(--rail-left) !important;
   padding-right: var(--gutter);
   padding-bottom: .8rem;
 }
-.section-head h2,
-.stack-head h2,
-.stack-section h2,
-.projects-section h2{
+.section-head h2{
   margin:0 !important;
   font-weight:700;
-  font-size: clamp(1.3rem, 2.6vw, 1.6rem); /* Tech Stack & Projects same size */
+  font-size: clamp(1.3rem, 2.6vw, 1.6rem);
 }
 
 /* ===== About panel ===== */
@@ -82,34 +78,57 @@ section{ padding: 3rem var(--gutter); }
   background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
   border-radius:24px; box-shadow:var(--shadow); outline:var(--ring);
   padding:var(--card-pad);
-  margin-bottom: clamp(.8rem, 2.6vw, 1.6rem); /* tighter: About -> Tech Stack */
+  margin-bottom: clamp(.8rem, 2.6vw, 1.6rem);
 }
 .about-copy h1{
   margin:0; font-weight:700;
-  font-size: clamp(2.2rem, 4.2vw, 3rem);   /* bigger than h2s */
+  font-size: clamp(2.2rem, 4.2vw, 3rem);
 }
 .about-divider{ width:64px; height:2px; background:#fff; border-radius:2px; margin:12px 0 16px; opacity:.95; }
 .about-copy p{ margin:0; color:var(--muted); line-height:1.85; max-width:62ch; }
 .about-visual{ display:grid; place-items:center; }
 .nn-glyph{ width:min(560px,100%); height:auto; }
 
+/* About title aligns to the same rail by offsetting the card's inner padding */
+.about-copy{
+  margin-left: calc(var(--rail-left) - var(--card-pad)) !important;
+}
+/* keep it safe on small screens */
+@media (max-width: 900px){
+  .about-copy{ margin-left: 0 !important; }
+}
+
 /* subtle hairline after About */
 .section-divider{ max-width:var(--container); margin:1.1rem auto 0; padding:0 var(--gutter); }
 .section-divider .line{ height:1px; background:linear-gradient(90deg,transparent,var(--hair),transparent); }
 
 /* ===== Tech Stack ===== */
-.stack-section{ padding-top:.4rem; margin-top:.1rem; } /* same section as About */
-.stack-wrap{ max-width:var(--container); margin:0 auto; padding:0 var(--gutter); }
+.stack-section{ 
+  padding-top: 1.2rem;
+  margin-top: clamp(2.5rem, 6vw, 4rem); /* proper spacing from About */
+}
+
+.stack-wrap{ 
+  max-width:var(--container); 
+  margin:0 auto; 
+  padding:0 var(--gutter); 
+}
+
+/* Subtitle styling and positioning */
 .stack-sub{
-  margin:0; margin-left: var(--rail-left);
-  color:var(--muted); line-height:1.6; max-width:68ch; font-size:.98rem;
+  margin: 0.8rem 0 0 0 !important;
+  color:var(--muted); 
+  line-height:1.6; 
+  max-width:68ch; 
+  font-size:.98rem;
 }
 
 /* horizontal 3-box row */
 .stack-groups{
   display:flex; gap:clamp(1rem, 2vw, 1.4rem);
   flex-wrap:nowrap; justify-content:space-between;
-  max-width:var(--container); margin:1.1rem auto 0; padding:0 var(--gutter);
+  margin: 0;
+  padding: 0;
 }
 @media (max-width:900px){ .stack-groups{ flex-wrap:wrap; } }
 
@@ -263,27 +282,11 @@ section{ padding: 3rem var(--gutter); }
 
 @media (prefers-reduced-motion: reduce){
   .nn-edges,.nn-nodeF,.nn-nodeB,
-  /* rainbow border should NOT cover content */
-  .stack-group::before{
-    content:"";
-    position:absolute; inset:0; border-radius:14px; pointer-events:none; z-index:1;
-    background:
-      linear-gradient(transparent,transparent) padding-box, /* transparent center */
-      var(--rbw) border-box;                                /* rainbow border */
-    border:1.5px solid transparent;
-    opacity:0; /* animated on via keyframes */
+  .stack-group::before,
+  .stack-group::after {
+    animation: none !important;
   }
-
-  .stack-group::after{
-    content:"";
-    position:absolute; inset:-3px; border-radius:16px; pointer-events:none; z-index:-1;
-    background: var(--rbw);
-    filter: blur(12px);
-    opacity:0; /* animated on via keyframes */
-  }
-
 }
-
 
 /* ========= KILL THE RAINBOW FOR NOW ========= */
 .stack-group::before,
@@ -291,43 +294,4 @@ section{ padding: 3rem var(--gutter); }
   content: none !important;
   animation: none !important;
   opacity: 0 !important;
-}
-
-/* ========= ONE HARD TITLE RAIL (container left) ========= */
-:root{
-  /* rail is at the page gutter (container’s left edge) */
-  --rail-left: var(--gutter);
-}
-
-/* Tech Stack + Projects wrappers sit exactly on the rail */
-.stack-head,
-.section-head{
-  max-width: var(--container);
-  margin: 0 auto;
-  padding-left: var(--rail-left) !important;
-  padding-right: var(--gutter) !important;
-  padding-bottom: .8rem !important;
-}
-
-/* Kill any leftover margin-left rules from earlier */
-.stack-head h2,
-.section-head h2,
-.stack-section h2,
-.projects-section h2{
-  margin: 0 !important;
-  font-size: clamp(1.3rem, 2.6vw, 1.6rem); /* same size for Tech Stack & Projects */
-}
-
-/* Subtitle under Tech Stack also aligns to the rail */
-.stack-sub{
-  margin-left: var(--rail-left) !important;
-}
-
-/* About title aligns to the same rail by offsetting the card’s inner padding */
-.about-copy{
-  margin-left: calc(var(--rail-left) - var(--card-pad)) !important;
-}
-/* keep it safe on small screens */
-@media (max-width: 900px){
-  .about-copy{ margin-left: 0 !important; }
 }
