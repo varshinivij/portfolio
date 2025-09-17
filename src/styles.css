@@ -326,16 +326,21 @@ section{ padding: clamp(2rem, 4vw, 3rem) var(--gutter); }
   .stack-section{ padding-bottom: clamp(4rem, 8vw, 6rem); }
 }
 
-/* Projects: 3-up wide, 2-up mid, single on phones */
-@media (min-width: 1280px){
-  .proj-card{ flex-basis: calc((100% - 2 * var(--gap)) / 3); }
+/* ===== Projects: 2-up desktop/tablet, 1-up mobile ===== */
+
+.proj-card {
+  flex: 0 0 calc((100% - var(--gap)) / 2);  /* default: 2 cards side by side */
 }
-@media (max-width: 1279px) and (min-width: 901px){
-  .proj-card{ flex-basis: calc((100% - var(--gap)) / 2); }
+
+@media (max-width: 900px) {
+  .proj-card {
+    flex-basis: 85%;                        /* mobile: single large card */
+  }
+  .carousel-track {
+    padding: 0 clamp(1.2rem, 4vw, 2.2rem);
+  }
 }
-@media (max-width: 900px){
-  .carousel-track{ padding: 0 clamp(1.2rem, 4vw, 2.2rem); }
-}
+
 
 /* Improve scroll experience on iOS */
 .carousel-track {
