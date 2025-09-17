@@ -10,6 +10,7 @@ export default function App() {
       <About />
       <TechStack />
       <Projects />
+      <Footer />
     </>
   );
 }
