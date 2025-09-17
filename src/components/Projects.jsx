@@ -45,7 +45,7 @@ export default function Projects() {
     },
     {
       title: "Zotbotics Website & Auth System",
-      href: "https://example.com/zotbotics", // replace with real link if you want
+      href: "http://zotbotics-uci.github.io/", // replace with real link if you want
       image: "/assets/proj-3.png",
       description: "Built club website and authentication system with SQL DB + custom STL hasher, securing data for 1000+ use cases.",
     },
